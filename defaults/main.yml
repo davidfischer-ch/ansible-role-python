@@ -1,4 +1,5 @@
 python_dynamic_defaults:
+
   centos:
     python_build_packages:
       - bzip2-devel
@@ -15,46 +16,72 @@ python_dynamic_defaults:
       - zlib-devel
     python_packages:
       - python-devel
+      - python3-devel.x86_64
     python_versions:
       - '2.7'
       - '3.6'
+
   debian-lenny-sid:
     python_packages:
       - python-dev
     python_versions:
       - '2.5'
+
   debian-8.*:
     python_versions:
       - '2.7'
       - '3.4'
+
   linux-mint-19:
     python_versions:
       - '2.7'
       - '3.6'
+
+  redhat-7.*:
+    python_packages:
+      - python
+      - python-devel
+      - python-pip
+      - python-setuptools
+      - python-virtualenv
+    python_pip_path: /usr/bin/pip
+    python_rhsm_repositories:
+      - rhel-7-server-optional-rpms
+      - rhel-server-rhscl-7-rpms
+    python_setup_mode: rhsm
+    python_versions:
+      - '2.7'
+
   ubuntu-12.*:
     python_versions:
       - '2.7'
       # - '3.2' pip do not support it anymore
+
   ubuntu-14.*:
     python_versions:
       - '2.7'
       - '3.4'
+
   ubuntu-15.*:
     python_versions:
       - '2.7'
       - '3.4'
+
   ubuntu-16.*:
     python_versions:
       - '2.7'
       - '3.5'
+
   ubuntu-17.*:
     python_versions:
       - '2.7'
       - '3.6'
+
   ubuntu-18.*:
     python_versions:
       - '2.7'
       - '3.6'
+
   linux:
     python_build_packages:
       - dpkg-dev
@@ -79,17 +106,28 @@ python_dynamic_defaults:
     python_versions:
       - '2.7'
       - '3.6'
+
   macosx:
     python_packages: []
     python_versions:
       - '2.7'
+
+  default:
+    python_pip_path: /usr/local/bin/pip
+    python_setup_mode: normal
+
+# CPython
 python_build_flags: []
   # - '--enable-optimizations'
 python_default_version: '{{ python_versions|first }}'
-python_pip_path: /usr/local/bin/pip
-python_get_pip_options: ''
 python_latest_versions:  # map version X.Y -> latest version X.Y.Z
-  '3.6': '3.6.5'
+  '3.6': '3.6.9'
+
+# PIP
+python_get_pip_options: ''
+python_pip_environment: ''
 python_pip_version: ''
+
+# Tools
 python_setuptools_version: latest
 python_virtualenv_version: latest

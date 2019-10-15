@@ -1,0 +1,26 @@
+---
+
+- dynamic_defaults:
+    hostvars: '{{ hostvars[inventory_hostname] }}'
+    defaults: '{{ python_dynamic_defaults }}'
+    must_match: yes
+  tags: [python, always]
+
+- block:
+    - name: Enable Red Hat repositories
+      rhsm_repository:
+        name: '{{ python_rhsm_repositories }}'
+        state: enabled
+
+    - name: Install Python packages
+      package:
+        name: '{{ python_packages }}'
+        state: present
+
+    - include_tasks: get-versions.yml
+
+    - assert:
+        that:
+          - not python_missing_versions|default([])
+  become: yes
+  tags: [python, packages]

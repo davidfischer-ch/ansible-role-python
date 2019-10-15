@@ -1,0 +1,15 @@
+---
+
+- block:
+    - name: Detect missing Python versions
+      command:
+        python{{ item }}
+      changed_when: _python_command is failure
+      check_mode: no
+      failed_when: no
+      loop: '{{ python_versions }}'
+      register: _python_command
+
+    - set_fact:
+        python_missing_versions: "{{ _python_command.results|selectattr('changed')|map(attribute='item')|list }}"
+  tags: [python, packages]  # FIXME Remove when this is fixed https://github.com/ansible/ansible/issues/30882
