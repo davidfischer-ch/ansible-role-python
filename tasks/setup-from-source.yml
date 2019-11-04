@@ -10,12 +10,14 @@
 
     - set_fact:
         _python_latest_version: '{{ python_latest_versions[_python_version|string] }}'
+        _python_latest_checksum: '{{ python_latest_checksums[_python_version|string] }}'
 
     - name: Download Python {{ _python_latest_version }} source package
       get_url:
         url: https://www.python.org/ftp/python/{{ _python_latest_version }}/Python-{{ _python_latest_version }}.tgz
         dest: '{{ local_source_directory }}/Python-{{ _python_latest_version }}.tgz'
-        force: no
+        checksum: '{{ _python_latest_checksum }}'
+      environment: '{{ python_download_environment }}'
 
     - name: Extract Python {{ _python_latest_version }} source code
       unarchive:
