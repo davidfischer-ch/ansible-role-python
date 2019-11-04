@@ -6,6 +6,7 @@ python_dynamic_defaults:
       - db4-devel
       - expat-devel
       - gdbm-devel
+      - libffi-devel
       - libpcap-devel
       - ncurses-devel
       - openssl-devel
@@ -43,6 +44,7 @@ python_dynamic_defaults:
       - db4-devel
       - expat-devel
       - gdbm-devel
+      - libffi-devel
       # - libpcap-devel
       - ncurses-devel
       - openssl-devel
@@ -101,6 +103,7 @@ python_dynamic_defaults:
       - libc6-dev
       - libdb-dev
       - libexpat1-dev
+      - libffi-dev
       - libgdbm-dev
       - liblzma-dev
       - libncurses5-dev
