@@ -33,6 +33,7 @@
       changed_when: >
         'already up-to-date' not in _get_pip.stdout|default('') and
         'are using pip' not in _get_pip.stderr|default('')
+      environment: '{{ python_pip_environment }}'
       failed_when: >
         _get_pip is failure and
         'are using pip' not in _get_pip.stderr|default('')
