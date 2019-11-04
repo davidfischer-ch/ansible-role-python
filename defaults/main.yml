@@ -114,7 +114,7 @@ python_dynamic_defaults:
 
   default:
     python_pip_path: /usr/local/bin/pip
-    python_setup_mode: normal
+    python_setup_mode: standard
 
 # CPython
 python_build_flags: []
