@@ -36,6 +36,7 @@
         var: _python_configure.stdout_lines
         verbosity: 3
 
+    # See https://github.com/pyenv/pyenv/wiki/Common-build-problems
     - name: Build Python {{ _python_latest_version }} from source
       make:
         chdir: '{{ local_source_directory }}/Python-{{ _python_latest_version }}'
