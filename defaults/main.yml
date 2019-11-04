@@ -38,6 +38,19 @@ python_dynamic_defaults:
       - '3.6'
 
   redhat-7.*:
+    python_build_packages:
+      - bzip2-devel
+      - db4-devel
+      - expat-devel
+      - gdbm-devel
+      # - libpcap-devel
+      - ncurses-devel
+      - openssl-devel
+      - readline-devel
+      - sqlite-devel
+      - tk-devel
+      - xz-devel
+      - zlib-devel
     python_packages:
       - python
       - python-devel
