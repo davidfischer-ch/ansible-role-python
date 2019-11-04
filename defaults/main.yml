@@ -57,7 +57,6 @@ python_dynamic_defaults:
       - python-pip
       - python-setuptools
       - python-virtualenv
-    python_pip_path: /usr/bin/pip
     python_rhsm_repositories:
       - rhel-7-server-optional-rpms
       - rhel-server-rhscl-7-rpms
@@ -126,7 +125,6 @@ python_dynamic_defaults:
       - '2.7'
 
   default:
-    python_pip_path: /usr/local/bin/pip
     python_setup_mode: standard
 
 # CPython
@@ -146,6 +144,10 @@ python_latest_versions:  # map version X.Y -> latest version X.Y.Z
 # PIP
 python_get_pip_options: ''
 python_pip_environment: ''
+_python_pip_path:
+  rhsm: /usr/bin/pip
+  standard: /usr/local/bin/pip
+python_pip_path: '{{ _python_pip_path[python_setup_mode] }}'
 python_pip_version: ''
 
 # Tools
