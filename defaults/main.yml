@@ -120,8 +120,15 @@ python_dynamic_defaults:
 python_build_flags: []
   # - '--enable-optimizations'
 python_default_version: '{{ python_versions|first }}'
+
+# https://www.python.org/downloads/ - Last check -> 04/11/2019
 python_latest_versions:  # map version X.Y -> latest version X.Y.Z
-  '3.6': '3.6.9'
+  '2.7': '2.7.17'  # 19/10/2019
+  '3.4': '3.4.10'  # 18/03/2019
+  '3.5': '3.5.9'   # 02/11/2019
+  '3.6': '3.6.9'   # 02/07/2019
+  '3.7': '3.7.5'   # 15/10/2019
+  '3.8': '3.8.0'   # 14/10/2019
 
 # PIP
 python_get_pip_options: ''
