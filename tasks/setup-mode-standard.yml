@@ -24,7 +24,7 @@
         url: https://bootstrap.pypa.io{{ (item|string == '3.2')|ternary('/3.2', '') }}/get-pip.py
         dest: '{{ local_source_directory }}/get-pip-{{ item }}.py'
       loop: '{{ python_versions }}'
-      environment: '{{ python_pip_environment }}'
+      environment: '{{ python_download_environment }}'
 
     - name: Install pip
       command: >
