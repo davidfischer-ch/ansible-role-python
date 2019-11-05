@@ -52,6 +52,7 @@
         name: setuptools
         executable: pip{{ item }}
         state: "{{ (python_setuptools_version == 'latest')|ternary('latest', omit) }}"
+        umask: '{{ python_pip_umask }}'
         version: "{{ (python_setuptools_version == 'latest')|ternary(omit, python_setuptools_version) }}"
       loop: '{{ python_versions }}'
       environment: '{{ python_pip_environment }}'
@@ -61,6 +62,7 @@
         name: virtualenv
         executable: pip{{ item }}
         state: "{{ (python_virtualenv_version == 'latest')|ternary('latest', omit) }}"
+        umask: '{{ python_pip_umask }}'
         version: "{{ (python_virtualenv_version == 'latest')|ternary(omit, python_virtualenv_version) }}"
       loop: '{{ python_versions }}'
       environment: '{{ python_pip_environment }}'
