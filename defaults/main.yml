@@ -131,6 +131,7 @@ python_dynamic_defaults:
     python_setup_mode: standard
 
 # CPython
+
 python_build_flags: []
   # - '--enable-optimizations'
 python_default_version: '{{ python_versions|first }}'
@@ -154,14 +155,17 @@ python_latest_versions:
   '3.8': '3.8.0'   # 14/10/2019
 
 # PIP
+
 python_get_pip_options: ''
 python_pip_environment: ''
 _python_pip_path:
   rhsm: /usr/bin/pip
   standard: /usr/local/bin/pip
 python_pip_path: '{{ _python_pip_path[python_setup_mode] }}'
+python_pip_umask: '022'  # See https://github.com/MindPointGroup/RHEL7-CIS/issues/61#issuecomment-396690333
 python_pip_version: ''
 
 # Tools
+
 python_setuptools_version: latest
 python_virtualenv_version: latest
