@@ -27,8 +27,9 @@
       environment: '{{ python_download_environment }}'
 
     - name: Install pip
-      command: >
-        python{{ item }} {{ local_source_directory }}/get-pip-{{ item }}.py
+      shell: >
+        umask {{ python_pip_umask }} && \
+        python{{ item }} {{ local_source_directory }}/get-pip-{{ item }}.py \
         {{ python_get_pip_options }} pip{{ python_pip_version }}
       changed_when: >
         'already up-to-date' not in _get_pip.stdout|default('') and
