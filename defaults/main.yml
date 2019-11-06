@@ -156,7 +156,7 @@ python_latest_versions:
 
 # PIP
 
-python_get_pip_options: ''
+python_get_pip_options: []
 python_pip_environment: ''
 _python_pip_path:
   rhsm: /usr/bin/pip

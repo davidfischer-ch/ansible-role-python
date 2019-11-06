@@ -27,19 +27,14 @@
       environment: '{{ python_download_environment }}'
 
     - name: Install pip
-      shell: >
-        umask {{ python_pip_umask }} && \
-        python{{ item }} {{ local_source_directory }}/get-pip-{{ item }}.py \
-        {{ python_get_pip_options }} pip{{ python_pip_version }}
-      changed_when: >
-        'already up-to-date' not in _get_pip.stdout|default('') and
-        'are using pip' not in _get_pip.stderr|default('')
+      get_pip:
+        executable: '{{ local_source_directory }}/get-pip-{{ item }}.py'
+        options: '{{ python_get_pip_options }}'
+        python: 'python{{ item }}'
+        umask: '{{ python_pip_umask }}'
+        version: '{{ python_pip_version }}'
       environment: '{{ python_pip_environment }}'
-      failed_when: >
-        _get_pip is failure and
-        'are using pip' not in _get_pip.stderr|default('')
       loop: '{{ python_versions }}'
-      register: _get_pip
 
     - name: Set pip default version
       file:
