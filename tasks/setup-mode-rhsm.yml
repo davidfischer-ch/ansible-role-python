@@ -1,11 +1,5 @@
 ---
 
-- dynamic_defaults:
-    hostvars: '{{ hostvars[inventory_hostname] }}'
-    defaults: '{{ python_dynamic_defaults }}'
-    must_match: yes
-  tags: [python, always]
-
 - block:
     - name: Enable Red Hat repositories
       rhsm_repository:
