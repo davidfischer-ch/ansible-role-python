@@ -3,7 +3,7 @@
 - block:
     - name: Detect missing Python versions
       command:
-        python{{ item }}
+        python{{ item }} --version
       changed_when: _python_command is failure
       check_mode: no
       failed_when: no
