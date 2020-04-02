@@ -13,6 +13,28 @@
       loop_control:
         loop_var: _python_version
 
+    - name: Download PyPy release package
+      get_url:
+        url: '{{ python_pypy_release_url }}'
+        dest: '{{ local_source_directory }}/{{ python_pypy_release_name }}.{{ python_pypy_release_extension }}'
+        checksum: '{{ python_pypy_latest_checksums[item|string] }}'
+      environment: '{{ python_download_environment }}'
+      loop: '{{ python_pypy_versions }}'
+
+    - name: Extract PyPy release
+      unarchive:
+        src: '{{ local_source_directory }}/{{ python_pypy_release_name }}.{{ python_pypy_release_extension }}'
+        dest: '{{ local_source_directory }}'
+        copy: no
+      loop: '{{ python_pypy_versions }}'
+
+    - name: Symlink PyPy runtime
+      file:
+        src: "{{ local_source_directory }}/{{ python_pypy_release_name }}/bin/pypy{{ item|string|first|regex_replace('2', '') }}"
+        dest: '/usr/local/bin/pypy{{ item }}'
+        state: link
+      loop: '{{ python_pypy_versions }}'
+
     - name: Download pip bootstrap script
       get_url:
         url: https://bootstrap.pypa.io{{ (item|string == '3.2')|ternary('/3.2', '') }}/get-pip.py

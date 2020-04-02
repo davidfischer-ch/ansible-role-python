@@ -122,6 +122,17 @@ python_dynamic_defaults:
       - '2.7'
       - '3.6'
 
+    # https://bitbucket.org/pypy/pypy/downloads/ - Last check -> 02/04/2020
+    python_pypy_latest_checksums:
+      '2.7': md5:a58cab39c8281c93bc6279b37f8a98e0  # 02/04/2020
+      '3.6': md5:f0d930ccb83e5483fb8d5e0e5ecd387f  # 02/04/2020
+    python_pypy_latest_versions:
+      '2.7': '7.3.0'  # 02/04/2020
+      '3.6': '7.3.0'  # 02/04/2020
+
+    python_pypy_release_flavor: linux64
+    python_pypy_release_extension: tar.bz2
+
   macosx:
     python_packages: []
     python_versions:
@@ -153,6 +164,13 @@ python_latest_versions:
   '3.6': '3.6.9'   # 02/07/2019
   '3.7': '3.7.5'   # 15/10/2019
   '3.8': '3.8.0'   # 14/10/2019
+
+# PyPy
+
+python_pypy_release_url: https://bitbucket.org/pypy/pypy/downloads/{{ python_pypy_release_name }}.{{ python_pypy_release_extension }}
+python_pypy_release_name: pypy{{ item }}-v{{ python_pypy_latest_versions[item|string] }}-{{ python_pypy_release_flavor }}
+
+python_pypy_versions: []
 
 # PIP
 
