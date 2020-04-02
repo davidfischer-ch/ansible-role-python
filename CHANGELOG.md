@@ -1,5 +1,11 @@
 # Changelog
 
+## v1.0.2
+
+### Fix and enhancements
+
+- Install PyPy runtimes from release packages (optional feature)
+
 ## v1.0.1
 
 ### Fix and enhancements
