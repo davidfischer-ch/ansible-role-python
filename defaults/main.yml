@@ -148,22 +148,22 @@ python_build_flags: []
 python_default_version: '{{ python_versions|first }}'
 python_download_environment: '{{ python_pip_environment }}'
 
-# https://www.python.org/downloads/ - Last check -> 04/11/2019
+# https://www.python.org/downloads/ - Last check -> 04/04/2020
 # Map version X.Y -> latest version X.Y.Z & checksum
 python_latest_checksums:
   '2.7': md5:27a7919fa8d1364bae766949aaa91a5b  # 19/10/2019
   '3.4': md5:2452f4d809ae9d88011ccafe12c4b6d3  # 18/03/2019
   '3.5': md5:5a58675043bde569d235f41dadeada42  # 02/11/2019
-  '3.6': md5:ff7cdaef4846c89c1ec0d7b709bbd54d  # 02/07/2019
-  '3.7': md5:1cd071f78ff6d9c7524c95303a3057aa  # 15/10/2019
-  '3.8': md5:e18a9d1a0a6d858b9787e03fc6fdaa20  # 14/10/2019
+  '3.6': md5:df5f494ef9fbb03a0264d1e9d406aada  # 18/12/2019
+  '3.7': md5:d348d978a5387512fbc7d7d52dd3a5ef  # 10/03/2020
+  '3.8': md5:f9f3768f757e34b342dbc06b41cbc844  # 24/02/2020
 python_latest_versions:
   '2.7': '2.7.17'  # 19/10/2019
   '3.4': '3.4.10'  # 18/03/2019
   '3.5': '3.5.9'   # 02/11/2019
-  '3.6': '3.6.9'   # 02/07/2019
-  '3.7': '3.7.5'   # 15/10/2019
-  '3.8': '3.8.0'   # 14/10/2019
+  '3.6': '3.6.10'  # 18/12/2019
+  '3.7': '3.7.7'   # 10/03/2020
+  '3.8': '3.8.2'   # 24/02/2020
 
 # PyPy
 
