@@ -1,5 +1,11 @@
 # Changelog
 
+## v1.0.3
+
+### Fix and enhancements
+
+- Refresh `python_latest_*`
+
 ## v1.0.2
 
 ### Fix and enhancements
