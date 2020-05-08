@@ -19,7 +19,6 @@ PyPy runtimes defined in `python_pypy_versions` will be installed from the relea
 A symbolic link to the runtime will make it available in `$PATH`.
 
 You can reach me if you need more explanations.
-I really have to update this README.
 
 ## Remarks
 
