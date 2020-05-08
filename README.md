@@ -127,12 +127,15 @@ python_build_flags:
 #### python_build_install_dependencies_of
 
 This role will conveniently use the package manager to install Python build dependencies.
+
 This is convenient for most users as this list may change over time and is probably quite long.
+
 Set it to an empty string to skip this feature and take full control of packages using ONLY `python_build_packages`.
 
 Default: `python` <- is the package name
 
 Translated to `apt-get build-dep python` on APT powered distributions.
+
 Translated to `yum-builddep --assumeyes python` on YUM powered distributions.
 
 #### python_build_packages
@@ -158,6 +161,7 @@ Default: `'{{ python_versions|first }}'`
 #### python_download_environment
 
 Any environment variables required to download artifacts (source code, etc).
+
 For example you can define a proxy, see `python_pip_environment`.
 
 Default: `'{{ python_pip_environment }}'`
@@ -165,7 +169,9 @@ Default: `'{{ python_pip_environment }}'`
 #### python_latest_checksums
 
 Maps version to the checksum of the latest release available for that version.
+
 I periodically update this list so if you want to be 100% idempotent, you have to override it.
+
 For example, `3.8` will be mapped to `3.8.2` with a checksum of `md5:f9f3768f757e34b342dbc06b41cbc844`.
 
 Default: A dict mapping version to MD5 checksum.
@@ -173,7 +179,9 @@ Default: A dict mapping version to MD5 checksum.
 #### python_latest_versions
 
 Maps version to the *full* version number of the latest release available for that version.
+
 I periodically update this list so if you want to be 100% idempotent, you have to override it.
+
 For example, `3.8` will be mapped to `3.8.2` with a checksum of `md5:f9f3768f757e34b342dbc06b41cbc844`.
 
 Default: A dict mapping version to the full version (including minor).
@@ -181,6 +189,7 @@ Default: A dict mapping version to the full version (including minor).
 #### python_paths
 
 Let you the choice to define the paths to Python interpreters (influence interpreters discovery and pip installs).
+
 Can be defined to force building a Python interpreter from source :)
 
 Any version not defined here will be mapped to `python_default_path`.
@@ -237,6 +246,7 @@ Default: `[]`
 #### python_pip_environment
 
 Any environment variable required for PIP to be successful.
+
 For example you can define a proxy and/or a mirror for the packages.
 
 Default: `{}`
@@ -283,6 +293,7 @@ Default: `''`
 #### python_setuptools_version
 
 Define the version of `setuptools` package to install using `pip`.
+
 Set it to an empty string to skip this step.
 
 Default: `latest`
@@ -290,6 +301,7 @@ Default: `latest`
 #### python_virtualenv_version
 
 Define the version of `virtualenv` package to install using `pip`.
+
 Set it to an empty string to skip this step.
 
 Default: `latest`
