@@ -5,7 +5,7 @@ See [ansible-roles](https://github.com/davidfischer-ch/ansible-roles) for additi
 
 This repository hosts the role python and may depend of other roles and plugins of the library.
 
-This role install Python runtimes and tools (`setuptools` and `pip`).
+This role install Python runtimes and tools (`pip`, `setuptools` and `virtualenv`).
 
 CPython runtimes defined in `python_versions` can be either installed by the package manager:
 
@@ -22,6 +22,11 @@ You can reach me if you need more explanations.
 I really have to update this README.
 
 ## Remarks
+
+### Tools
+
+- You can disable installing `setuptools` by setting `python_setuptools_version` to `''`
+- You can disable installing `virtualenv` by setting `python_virtualenv_version` to `''`
 
 ### Compilation
 

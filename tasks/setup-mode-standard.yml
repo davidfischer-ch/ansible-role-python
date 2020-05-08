@@ -68,6 +68,7 @@
         version: "{{ (python_setuptools_version == 'latest')|ternary(omit, python_setuptools_version) }}"
       loop: '{{ python_versions }}'
       environment: '{{ python_pip_environment }}'
+      when: python_setuptools_version|length > 0
 
     - name: Install virtualenv
       pip:
@@ -78,5 +79,6 @@
         version: "{{ (python_virtualenv_version == 'latest')|ternary(omit, python_virtualenv_version) }}"
       loop: '{{ python_versions }}'
       environment: '{{ python_pip_environment }}'
+      when: python_virtualenv_version|length > 0
   become: '{{ do_become }}'
   tags: [python, packages]
