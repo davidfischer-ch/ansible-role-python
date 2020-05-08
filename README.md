@@ -356,7 +356,7 @@ Note: Override `python_latest_checksums` and `python_latest_versions` to enforce
     prefix_directory: /opt/non-root-path
     local_source_directory: '{{ prefix_directory }}/src'
 
-    # Disable packages management, hope required dependencies are installed, (aks IT for it)
+    # Disable packages management, hope required dependencies are installed
     build_packages: []
     python_build_install_dependencies_of: ''
     python_build_packages: []
