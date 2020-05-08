@@ -147,7 +147,7 @@ python_dynamic_defaults:
 
 python_build_environment: {}
 python_build_flags: []
-  # - '--enable-optimizations'
+python_build_install_dependencies_of: python
 python_build_params:
   '--jobs': '{{ ansible_processor_cores }}'
 
