@@ -52,22 +52,12 @@
       environment: '{{ python_pip_environment }}'
       loop: '{{ python_versions }}'
 
-    # FIXME Of course, yet another issue with synchronize module
-    # https://github.com/ansible/ansible/issues/56629
-    # - name: Set pip default version
-    #   synchronize:
-    #     src: '{{ python_pip_path }}{{ python_default_version }}'
-    #     dest: '{{ python_pip_path }}'
-    #     archive: yes
-    #   delegate_to: '{{ inventory_hostname }}'
-
     - name: Set pip default version
-      command: >
-        rsync {{ python_pip_path }}{{ python_default_version }} {{ python_pip_path }}
-        --archive {{ '--dry-run' if ansible_check_mode else '' }}
-      check_mode: no
-      changed_when: _python_sync.stdout_lines|length > 2
-      register: _python_sync
+      copy:
+        src: '{{ python_pip_path }}{{ python_default_version }}'
+        dest: '{{ python_pip_path }}'
+        mode: 755
+        remote_src: yes
 
     - name: Install setuptools
       pip:
