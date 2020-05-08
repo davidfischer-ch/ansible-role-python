@@ -6,79 +6,87 @@
         name: '{{ python_packages }}'
         state: present
 
-    - include_tasks: get-versions.yml
+    - block:
+        - include_tasks: get-versions.yml
 
-    - include_tasks: setup-from-source.yml
-      loop: '{{ python_missing_versions|default([]) }}'
-      loop_control:
-        loop_var: _python_version
+        - include_tasks: setup-from-source.yml
+          loop: '{{ python_missing_versions|default([]) }}'
+          loop_control:
+            loop_var: _python_version
+      tags: cpython
 
-    - name: Download PyPy release package
-      get_url:
-        url: '{{ python_pypy_release_url }}'
-        dest: '{{ local_source_directory }}/{{ python_pypy_release_name }}.{{ python_pypy_release_extension }}'
-        checksum: '{{ python_pypy_latest_checksums[item|string] }}'
-      environment: '{{ python_download_environment }}'
-      loop: '{{ python_pypy_versions }}'
+    - block:
+        - name: Download PyPy release package
+          get_url:
+            url: '{{ python_pypy_release_url }}'
+            dest: '{{ local_source_directory }}/{{ python_pypy_release_name }}.{{ python_pypy_release_extension }}'
+            checksum: '{{ python_pypy_latest_checksums[item|string] }}'
+          environment: '{{ python_download_environment }}'
+          loop: '{{ python_pypy_versions }}'
 
-    - name: Extract PyPy release
-      unarchive:
-        src: '{{ local_source_directory }}/{{ python_pypy_release_name }}.{{ python_pypy_release_extension }}'
-        dest: '{{ local_source_directory }}'
-        copy: no
-      loop: '{{ python_pypy_versions }}'
+        - name: Extract PyPy release
+          unarchive:
+            src: '{{ local_source_directory }}/{{ python_pypy_release_name }}.{{ python_pypy_release_extension }}'
+            dest: '{{ local_source_directory }}'
+            copy: no
+          loop: '{{ python_pypy_versions }}'
 
-    - name: Symlink PyPy runtime
-      file:
-        src: "{{ local_source_directory }}/{{ python_pypy_release_name }}/bin/pypy{{ item|string|first|regex_replace('2', '') }}"
-        dest: '/usr/local/bin/pypy{{ item }}'
-        state: link
-      loop: '{{ python_pypy_versions }}'
+        - name: Symlink PyPy runtime
+          file:
+            src: "{{ local_source_directory }}/{{ python_pypy_release_name }}/bin/pypy{{ item|string|first|regex_replace('2', '') }}"
+            dest: '/usr/local/bin/pypy{{ item }}'
+            state: link
+          loop: '{{ python_pypy_versions }}'
+      tags: pypy
 
-    - name: Download pip bootstrap script
-      get_url:
-        url: https://bootstrap.pypa.io{{ (item|string == '3.2')|ternary('/3.2', '') }}/get-pip.py
-        dest: '{{ local_source_directory }}/get-pip-{{ item }}.py'
-      loop: '{{ python_versions }}'
-      environment: '{{ python_download_environment }}'
+    - block:
+        - name: Download pip bootstrap script
+          get_url:
+            url: https://bootstrap.pypa.io{{ (item|string == '3.2')|ternary('/3.2', '') }}/get-pip.py
+            dest: '{{ local_source_directory }}/get-pip-{{ item }}.py'
+          loop: '{{ python_versions }}'
+          environment: '{{ python_download_environment }}'
 
-    - name: Install pip
-      get_pip:
-        executable: '{{ local_source_directory }}/get-pip-{{ item }}.py'
-        options: '{{ python_get_pip_options }}'
-        python: 'python{{ item }}'
-        umask: '{{ python_pip_umask }}'
-        version: '{{ python_pip_version }}'
-      environment: '{{ python_pip_environment }}'
-      loop: '{{ python_versions }}'
+        - name: Install pip
+          get_pip:
+            executable: '{{ local_source_directory }}/get-pip-{{ item }}.py'
+            options: '{{ python_get_pip_options }}'
+            python: 'python{{ item }}'
+            umask: '{{ python_pip_umask }}'
+            version: '{{ python_pip_version }}'
+          environment: '{{ python_pip_environment }}'
+          loop: '{{ python_versions }}'
 
-    - name: Set pip default version
-      copy:
-        src: '{{ python_pip_path }}{{ python_default_version }}'
-        dest: '{{ python_pip_path }}'
-        mode: 755
-        remote_src: yes
+        - name: Set pip default version
+          copy:
+            src: '{{ python_pip_path }}{{ python_default_version }}'
+            dest: '{{ python_pip_path }}'
+            mode: 755
+            remote_src: yes
+      tags: pip
 
-    - name: Install setuptools
-      pip:
-        name: setuptools
-        executable: pip{{ item }}
-        state: "{{ (python_setuptools_version == 'latest')|ternary('latest', omit) }}"
-        umask: '{{ python_pip_umask }}'
-        version: "{{ (python_setuptools_version == 'latest')|ternary(omit, python_setuptools_version) }}"
-      loop: '{{ python_versions }}'
-      environment: '{{ python_pip_environment }}'
-      when: python_setuptools_version|length > 0
+    - block:
+        - name: Install setuptools
+          pip:
+            name: setuptools
+            executable: pip{{ item }}
+            state: "{{ (python_setuptools_version == 'latest')|ternary('latest', omit) }}"
+            umask: '{{ python_pip_umask }}'
+            version: "{{ (python_setuptools_version == 'latest')|ternary(omit, python_setuptools_version) }}"
+          loop: '{{ python_versions }}'
+          environment: '{{ python_pip_environment }}'
+          when: python_setuptools_version|length > 0
 
-    - name: Install virtualenv
-      pip:
-        name: virtualenv
-        executable: pip{{ item }}
-        state: "{{ (python_virtualenv_version == 'latest')|ternary('latest', omit) }}"
-        umask: '{{ python_pip_umask }}'
-        version: "{{ (python_virtualenv_version == 'latest')|ternary(omit, python_virtualenv_version) }}"
-      loop: '{{ python_versions }}'
-      environment: '{{ python_pip_environment }}'
-      when: python_virtualenv_version|length > 0
+        - name: Install virtualenv
+          pip:
+            name: virtualenv
+            executable: pip{{ item }}
+            state: "{{ (python_virtualenv_version == 'latest')|ternary('latest', omit) }}"
+            umask: '{{ python_pip_umask }}'
+            version: "{{ (python_virtualenv_version == 'latest')|ternary(omit, python_virtualenv_version) }}"
+          loop: '{{ python_versions }}'
+          environment: '{{ python_pip_environment }}'
+          when: python_virtualenv_version|length > 0
+      tags: pytools
   become: '{{ do_become }}'
   tags: [python, packages]
