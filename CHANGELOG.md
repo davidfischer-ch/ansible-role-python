@@ -1,5 +1,13 @@
 # Changelog
 
+## v1.0.5
+
+### Fix and enhancements
+
+- Make the installation of build dependencies using the package manager an optional feature (and more flexible one)
+- Make it possible to enforce Python interpreter(s) path(s)
+- Update README
+
 ## v1.0.4
 
 ### Fix and enhancements
