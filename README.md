@@ -268,7 +268,7 @@ Default: Either `/usr/bin/pip` (if rhsm) or `/usr/local/bin/pip` (if standard).
 
 Define umask when installing packages with `pip`.
 
-See https://github.com/MindPointGroup/RHEL7-CIS/issues/61#issuecomment-396690333
+See https://github.com/MindPointGroup/RHEL7-CIS/issues/61#issuecomment-396690333.
 
 Default: `'022'`
 
@@ -322,6 +322,52 @@ Note: Override `python_latest_checksums` and `python_latest_versions` to enforce
 
     python_setuptools_version: latest
     python_virtualenv_version: ''  # We do not want it
+```
+
+### Installing Python 3.8 from Source without sudo rights
+
+Example for compiling ONLY Python 3.8 from latest current release (e.g. 3.8.2).
+
+Note: Override `python_latest_checksums` and `python_latest_versions` to enforce a specific the version.
+
+### Playbook
+
+```
+---
+
+- hosts:
+    - localhost
+  roles:
+    - python
+  vars:
+    do_become: no  # Do not sudo
+    prefix_directory: /opt/non-root-path
+    local_source_directory: '{{ prefix_directory }}/src'
+
+    # Disable packages management, hope required dependencies are installed, (aks IT for it)
+    build_packages: []
+    python_build_install_dependencies_of: ''
+    python_build_packages: []
+    python_packages: []
+
+    # CPython
+
+    python_build_flags:
+      - --enable-optimizations          # https://stackoverflow.com/questions/41405728
+      - --enable-option-checking=fatal  # https://www.gnu.org/software/autoconf/manual/autoconf-2.69/html_node/Option-Checking.html
+      - --prefix={{ prefix_directory }}
+
+    python_setup_mode: standard
+    python_versions: [3.8]
+    python_paths:
+      3.8: '{{ prefix_directory }}/bin/python3.8'
+
+    # PIP
+
+    python_get_pip_options:
+      - --prefix={{ prefix_directory }}
+
+    python_pip_path: '{{ prefix_directory }}/bin/pip'
 ```
 
 ### Installing PyPy 3.6
