@@ -2,8 +2,8 @@
 
 - block:
     - name: Detect missing Python versions
-      command:
-        python{{ item }} --version
+      command: >
+        {{ python_paths[item]|default(python_default_path) }} --version
       changed_when: _python_command is failure
       check_mode: no
       failed_when: no

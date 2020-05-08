@@ -51,7 +51,7 @@
           get_pip:
             executable: '{{ local_source_directory }}/get-pip-{{ item }}.py'
             options: '{{ python_get_pip_options }}'
-            python: 'python{{ item }}'
+            python: '{{ python_paths[item]|default(python_default_path) }}'
             umask: '{{ python_pip_umask }}'
             version: '{{ python_pip_version }}'
           environment: '{{ python_pip_environment }}'

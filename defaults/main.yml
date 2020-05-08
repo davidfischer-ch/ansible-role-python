@@ -171,6 +171,9 @@ python_latest_versions:
   '3.7': '3.7.7'   # 10/03/2020
   '3.8': '3.8.2'   # 24/02/2020
 
+python_default_path: python{{ item }}
+python_paths: {}
+
 # PyPy
 
 python_pypy_release_url: https://bitbucket.org/pypy/pypy/downloads/{{ python_pypy_release_name }}.{{ python_pypy_release_extension }}
