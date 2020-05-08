@@ -30,6 +30,7 @@
         ./configure {{ python_build_flags|join(' ') }}
       args:
         chdir: '{{ local_source_directory }}/Python-{{ _python_latest_version }}'
+      environment: '{{ python_build_environment }}'
       register: _python_configure
 
     - debug:
@@ -40,8 +41,8 @@
     - name: Build Python {{ _python_latest_version }} from source
       make:
         chdir: '{{ local_source_directory }}/Python-{{ _python_latest_version }}'
-        params:
-          '--jobs': '{{ ansible_processor_cores }}'
+        params: '{{ python_build_params }}'
+      environment: '{{ python_build_environment }}'
       register: _python_build
 
     - debug:
@@ -52,5 +53,6 @@
       make:
         chdir: '{{ local_source_directory }}/Python-{{ _python_latest_version }}'
         target: install
+      environment: '{{ python_build_environment }}'
   become: '{{ do_become }}'
   tags: [python, packages] # FIXME Remove when this is fixed https://github.com/ansible/ansible/issues/30882

@@ -51,6 +51,32 @@ TODO VARIABLES
 
 ### Installing Python(s) from Source
 
+Example for compiling ONLY Python 3.8 from latest current release (e.g. 3.8.2).
+
+Note: Override `python_latest_checksums` and `python_latest_versions` to enforce a specific the version.
+
+### Playbook
+
+```
+---
+
+- hosts:
+    - localhost
+  roles:
+    - python
+  vars:
+    python_packages: []
+    python_setup_mode: standard
+    python_versions: [3.8]
+
+    python_build_flags:
+      - --enable-optimizations
+      - --enable-option-checking=fatal
+
+    python_setuptools_version: latest
+    python_virtualenv_version: ''  # We do not want it
+```
+
 ### Installing PyPy 3.6
 
 Example for installing ONLY PyPy 3.6 from latest current (available as pypy3.6 thanks to a symbolic link).
@@ -67,8 +93,46 @@ Note: Override `python_pypy_latest_checksums` and `python_pypy_latest_versions` 
   roles:
     - python
   vars:
+    build_packages: []
+    python_packages: []
     python_versions: []
     python_pypy_versions: [3.6]
+```
+
+### Installing Python(s) from Source (Static)
+
+**WARNING** This example is not yet working, compiling CPython statically with all modules available statically is hard and needs a lot of tweaking (I have at least 20 tabs open to find how to), feel free to contribute :)
+
+Example for compiling ONLY Python 3.8 from latest current release (e.g. 3.8.2).
+
+Note: Override `python_latest_checksums` and `python_latest_versions` to enforce a specific the version.
+
+See: https://wiki.python.org/moin/BuildStatically
+See: https://github.com/docker-library/python/blob/master/3.8/buster/slim/Dockerfile
+
+### Playbook
+
+```
+---
+
+- hosts:
+    - localhost
+  roles:
+    - python
+  vars:
+    python_packages: []
+    python_setup_mode: standard
+    python_versions: [3.8]
+
+    python_build_flags:
+      - --disable-shared
+      - --enable-optimizations
+      - --enable-option-checking=fatal
+      - LDFLAGS="-static"
+
+    python_build_params:
+      LDFLAGS: "-static"
+      LINKFORSHARED: " "
 ```
 
 ## License

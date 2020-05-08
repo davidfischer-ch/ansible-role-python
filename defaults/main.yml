@@ -145,8 +145,12 @@ python_dynamic_defaults:
 
 # CPython
 
+python_build_environment: {}
 python_build_flags: []
   # - '--enable-optimizations'
+python_build_params:
+  '--jobs': '{{ ansible_processor_cores }}'
+
 python_default_version: '{{ python_versions|first }}'
 python_download_environment: '{{ python_pip_environment }}'
 
