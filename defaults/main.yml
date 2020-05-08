@@ -189,7 +189,7 @@ _python_pip_path:
   rhsm: /usr/bin/pip
   standard: /usr/local/bin/pip
 python_pip_path: '{{ _python_pip_path[python_setup_mode] }}'
-python_pip_umask: '022'  # See https://github.com/MindPointGroup/RHEL7-CIS/issues/61#issuecomment-396690333
+python_pip_umask: '022'
 python_pip_version: ''
 
 # Tools
