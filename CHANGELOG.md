@@ -1,5 +1,16 @@
 # Changelog
 
+## v1.0.4
+
+### Fix and enhancements
+
+- Add variables python_build_{environnement,flags}
+- Can disable become (e.g. when building container)
+- Extend compatibility to Linux Mint 19.*
+- Make installation of setuptools and/or virtualenv optional
+- Tag task with the topic : cpython, pypy, pip and pytools
+- Replace rsync by copy module
+
 ## v1.0.3
 
 ### Fix and enhancements
