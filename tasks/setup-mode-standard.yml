@@ -69,7 +69,7 @@
         - name: Install setuptools
           pip:
             name: setuptools
-            executable: pip{{ item }}
+            executable: '{{ python_pip_path }}{{ item }}'
             state: "{{ (python_setuptools_version == 'latest')|ternary('latest', omit) }}"
             umask: '{{ python_pip_umask }}'
             version: "{{ (python_setuptools_version == 'latest')|ternary(omit, python_setuptools_version) }}"
@@ -80,7 +80,7 @@
         - name: Install virtualenv
           pip:
             name: virtualenv
-            executable: pip{{ item }}
+            executable: '{{ python_pip_path }}{{ item }}'
             state: "{{ (python_virtualenv_version == 'latest')|ternary('latest', omit) }}"
             umask: '{{ python_pip_umask }}'
             version: "{{ (python_virtualenv_version == 'latest')|ternary(omit, python_virtualenv_version) }}"
