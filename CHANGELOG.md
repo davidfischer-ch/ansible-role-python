@@ -1,5 +1,11 @@
 # Changelog
 
+## v1.0.6
+
+### Fix and enhancements
+
+- Use python_pip_path instead of relying on PATH
+
 ## v1.0.5
 
 ### Fix and enhancements
