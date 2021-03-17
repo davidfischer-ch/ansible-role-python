@@ -124,13 +124,13 @@ python_dynamic_defaults:
       - '2.7'
       - '3.6'
 
-    # https://bitbucket.org/pypy/pypy/downloads/ - Last check -> 02/04/2020
+    # https://bitbucket.org/pypy/pypy/downloads/ - Last check -> 02-04-2020
     python_pypy_latest_checksums:
-      '2.7': md5:a58cab39c8281c93bc6279b37f8a98e0  # 02/04/2020
-      '3.6': md5:f0d930ccb83e5483fb8d5e0e5ecd387f  # 02/04/2020
+      '2.7': md5:a58cab39c8281c93bc6279b37f8a98e0  # 02-04-2020
+      '3.6': md5:f0d930ccb83e5483fb8d5e0e5ecd387f  # 02-04-2020
     python_pypy_latest_versions:
-      '2.7': '7.3.0'  # 02/04/2020
-      '3.6': '7.3.0'  # 02/04/2020
+      '2.7': '7.3.0'  # 02-04-2020
+      '3.6': '7.3.0'  # 02-04-2020
 
     python_pypy_release_flavor: linux64
     python_pypy_release_extension: tar.bz2
@@ -154,22 +154,24 @@ python_build_params:
 python_default_version: '{{ python_versions|first }}'
 python_download_environment: '{{ python_pip_environment }}'
 
-# https://www.python.org/downloads/ - Last check -> 04/04/2020
+# https://www.python.org/downloads/ - Last check -> 17-03-2021
 # Map version X.Y -> latest version X.Y.Z & checksum
 python_latest_checksums:
-  '2.7': md5:27a7919fa8d1364bae766949aaa91a5b  # 19/10/2019
-  '3.4': md5:2452f4d809ae9d88011ccafe12c4b6d3  # 18/03/2019
-  '3.5': md5:5a58675043bde569d235f41dadeada42  # 02/11/2019
-  '3.6': md5:df5f494ef9fbb03a0264d1e9d406aada  # 18/12/2019
-  '3.7': md5:d348d978a5387512fbc7d7d52dd3a5ef  # 10/03/2020
-  '3.8': md5:f9f3768f757e34b342dbc06b41cbc844  # 24/02/2020
+  '2.7': md5:27a7919fa8d1364bae766949aaa91a5b  # 19-10-2019
+  '3.4': md5:2452f4d809ae9d88011ccafe12c4b6d3  # 18-03-2019
+  '3.5': md5:01a2d18075243bef5ef3363f62bf3247  # 05-09-2020
+  '3.6': md5:92fcbf417c691d42c47a3d82f9c255fd  # 15-02-2021
+  '3.7': md5:0b19e34a6dabc4bf15fdcdf9e77e9856  # 15-02-2021
+  '3.8': md5:d3af3b87e134c01c7f054205703adda2  # 19-02-2021
+  '3.9': md5:8cf053206beeca72c7ee531817dc24c7  # 19-02-2021
 python_latest_versions:
-  '2.7': '2.7.17'  # 19/10/2019
-  '3.4': '3.4.10'  # 18/03/2019
-  '3.5': '3.5.9'   # 02/11/2019
-  '3.6': '3.6.10'  # 18/12/2019
-  '3.7': '3.7.7'   # 10/03/2020
-  '3.8': '3.8.2'   # 24/02/2020
+  '2.7': '2.7.17'  # 19-10-2019
+  '3.4': '3.4.10'  # 18-03-2019
+  '3.5': '3.5.10'  # 05-09-2020
+  '3.6': '3.6.13'  # 15-02-2021
+  '3.7': '3.7.10'  # 15-02-2021
+  '3.8': '3.8.8'   # 19-02-2021
+  '3.9': '3.9.2'   # 19-02-2021
 
 python_default_path: python{{ item }}
 python_paths: {}
