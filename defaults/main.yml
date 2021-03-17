@@ -98,6 +98,10 @@ python_dynamic_defaults:
       - '2.7'
       - '3.6'
 
+  ubuntu-20.*:
+    python_versions:
+      - '3.8'
+
   linux:
     python_build_packages:
       - dpkg-dev
