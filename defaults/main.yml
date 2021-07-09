@@ -99,6 +99,9 @@ python_dynamic_defaults:
       - '3.6'
 
   ubuntu-20.*:
+    python_packages:
+      - bpython3
+      - python3-dev
     python_versions:
       - '3.8'
 
