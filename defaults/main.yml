@@ -157,7 +157,9 @@ python_dynamic_defaults:
 # CPython
 
 python_build_environment: {}
-python_build_flags: []
+python_build_flags:
+  # https://stackoverflow.com/questions/31273157/how-to-install-pip-on-compiled-from-source-python
+  - --with-ensurepip=install
 python_build_install_dependencies_of: python
 python_build_params:
   '--jobs': '{{ ansible_processor_cores }}'
