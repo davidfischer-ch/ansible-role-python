@@ -1,9 +1,9 @@
-# Ansible Role python
+# Ansible Role Python
 
 Library of Ansible plugins and roles for deploying various services.
 See [ansible-roles](https://github.com/davidfischer-ch/ansible-roles) for additional documentation.
 
-This repository hosts the role python and may depend of other roles and plugins of the library.
+This repository hosts the role Python and may depend of other roles and plugins of the library.
 
 This role install Python runtimes and tools (`pip`, `setuptools` and `virtualenv`).
 
