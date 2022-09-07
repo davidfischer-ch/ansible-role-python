@@ -99,6 +99,7 @@ python_dynamic_defaults:
       - '3.6'
 
   ubuntu-20.*:
+    python_build_install_dependencies_of: python3.8
     python_packages:
       - bpython3
       - python3-dev
@@ -106,6 +107,7 @@ python_dynamic_defaults:
       - '3.8'
 
   linux:
+    python_build_install_dependencies_of: python
     python_build_packages:
       - dpkg-dev
       - libbz2-dev
@@ -147,6 +149,7 @@ python_dynamic_defaults:
     python_pypy_release_extension: tar.bz2
 
   macosx:
+    python_build_install_dependencies_of: ''
     python_packages: []
     python_versions:
       - '2.7'
@@ -160,7 +163,6 @@ python_build_environment: {}
 python_build_flags:
   # https://stackoverflow.com/questions/31273157/how-to-install-pip-on-compiled-from-source-python
   - --with-ensurepip=install
-python_build_install_dependencies_of: python
 python_build_params:
   '--jobs': '{{ ansible_processor_cores }}'
 
