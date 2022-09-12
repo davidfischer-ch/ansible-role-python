@@ -2,6 +2,9 @@ do_become: yes
 
 python_dynamic_defaults:
 
+  # Python versions = what is installed by default with the distribution
+  # You wanna customize this for sure because its a little bit outdated!
+
   centos:
     python_build_packages:
       - bzip2-devel
@@ -39,6 +42,7 @@ python_dynamic_defaults:
     python_versions:
       - '2.7'
       - '3.6'
+    python_build_install_dependencies_of: python3.8
 
   redhat-7.*:
     python_build_packages:
