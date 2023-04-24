@@ -103,7 +103,7 @@ python_dynamic_defaults:
       - '3.6'
 
   ubuntu-20.*:
-    python_build_install_dependencies_of: python3.8
+    python_build_install_dependencies_of: python3
     python_packages:
       - bpython3
       - python3-dev
@@ -111,6 +111,7 @@ python_dynamic_defaults:
       - '3.8'
 
   ubuntu-22.*:
+    python_build_install_dependencies_of: python3
     python_packages:
       - python3-dev
     python_versions:
@@ -178,7 +179,7 @@ python_build_params:
 python_default_version: '{{ python_versions|first }}'
 python_download_environment: '{{ python_pip_environment }}'
 
-# https://www.python.org/downloads/ - Last check -> 26-01-2022
+# https://www.python.org/downloads/ - Last check -> 24-04-2023
 # Map version X.Y -> latest version X.Y.Z & checksum
 python_latest_checksums:
   '2.7': md5:27a7919fa8d1364bae766949aaa91a5b   # 19-10-2019
@@ -187,18 +188,19 @@ python_latest_checksums:
   '3.6': md5:f9e6f91c754a604f4fc6f6c7683723fb   # 04-09-2021
   '3.7': md5:6fe83678c085a7735a943cf1e4d41c14   # 04-09-2021
   '3.8': md5:f7890dd43302daa5fcb7b0254b4d0f33   # 30-08-2021
-  '3.9': md5:1440acb71471e2394befdb30b1a958d1   # 14-01-2022
-  '3.10': md5:67c92270be6701f4a6fed57c4530139b  # 14-01-2022
+  '3.9': md5:38c99c7313f416dcf3238f5cf444c6c2   # 24-04-2023
+  '3.10': md5:7e25e2f158b1259e271a45a249cb24bb  # 24-04-2023
+  '3.11': md5:016ba65bc80411f9ec20c614ab385e81  # 24-04-2023
 python_latest_versions:
-  '2.7': '2.7.17'   # 19-10-2019
-  '3.4': '3.4.10'   # 18-03-2019
-  '3.5': '3.5.10'   # 05-09-2020
-  '3.6': '3.6.15'   # 04-09-2021
-  '3.7': '3.7.12'   # 04-09-2021
-  '3.8': '3.8.12'   # 30-08-2021
-  '3.9': '3.9.10'   # 14-01-2022
-  '3.10': '3.10.2'  # 14-01-2022
-
+  '2.7': '2.7.17'    # 19-10-2019
+  '3.4': '3.4.10'    # 18-03-2019
+  '3.5': '3.5.10'    # 05-09-2020
+  '3.6': '3.6.15'    # 04-09-2021
+  '3.7': '3.7.12'    # 04-09-2021
+  '3.8': '3.8.12'    # 30-08-2021
+  '3.9': '3.9.16'    # 24-04-2023 Released 06-12-2022
+  '3.10': '3.10.11'  # 24-04-2023 Released 05-04-2023
+  '3.11': '3.11.3'   # 24-04-2023 Released 05-04-2023
 python_default_path: python{{ item }}
 python_paths: {}
 
