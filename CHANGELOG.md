@@ -1,6 +1,10 @@
 # Changelog
 
-## v1.0.7 (04-04-2023)
+## v1.0.8 (2023-05-23)
+
+- Update python releases
+
+## v1.0.7 (2023-04-04)
 
 ### Features
 
@@ -11,13 +15,13 @@
 
 - Set file(s) mode
 
-## v1.0.6 (24-08-2020)
+## v1.0.6 (2020-08-24)
 
 ### Fix and enhancements
 
 - Use python_pip_path instead of relying on PATH
 
-## v1.0.5 (08-05-2020)
+## v1.0.5 (2020-05-08)
 
 ### Fix and enhancements
 
@@ -25,7 +29,7 @@
 - Make it possible to enforce Python interpreter(s) path(s)
 - Update README
 
-## v1.0.4 (08-05-2020)
+## v1.0.4 (2020-05-08)
 
 ### Fix and enhancements
 
@@ -36,24 +40,24 @@
 - Tag task with the topic : cpython, pypy, pip and pytools
 - Replace rsync by copy module
 
-## v1.0.3 (15-04-2020)
+## v1.0.3 (2020-04-15)
 
 ### Fix and enhancements
 
 - Refresh `python_latest_*`
 
-## v1.0.2 (02-04-2020)
+## v1.0.2 (2020-04-02)
 
 ### Fix and enhancements
 
 - Install PyPy runtimes from release packages (optional feature)
 
-## v1.0.1 (23-03-2020)
+## v1.0.1 (2020-03-23)
 
 ### Fix and enhancements
 
 - Fix Detection of missing Python versions stuck
 
-## v1.0.0 (01-03-2020)
+## v1.0.0 (2020-03-01)
 
 - Initial release
