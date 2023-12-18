@@ -1,4 +1,6 @@
-do_become: yes
+---
+
+do_become: true
 
 python_dynamic_defaults:
 
@@ -226,3 +228,5 @@ python_pip_version: ''
 
 python_setuptools_version: latest
 python_virtualenv_version: latest
+
+...

@@ -2,19 +2,21 @@
 
 - block:
     - name: Enable Red Hat repositories
-      rhsm_repository:
+      ansible.builtin.rhsm_repository:
         name: '{{ python_rhsm_repositories }}'
         state: enabled
 
     - name: Install Python packages
-      package:
+      ansible.builtin.package:
         name: '{{ python_packages }}'
         state: present
 
     - include_tasks: get-versions.yml
 
-    - assert:
+    - ansible.builtin.assert:
         that:
           - not python_missing_versions|default([])
   become: '{{ do_become }}'
   tags: [python, packages]
+
+...

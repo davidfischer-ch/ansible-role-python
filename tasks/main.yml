@@ -3,8 +3,10 @@
 - dynamic_defaults:
     hostvars: '{{ hostvars[inventory_hostname] }}'
     defaults: '{{ python_dynamic_defaults }}'
-    must_match: yes
+    must_match: true
   tags: [python, always]
 
 - include_tasks: setup-mode-{{ python_setup_mode }}.yml
   tags: [python, packages]
+
+...

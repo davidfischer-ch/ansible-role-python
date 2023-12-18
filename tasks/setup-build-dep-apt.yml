@@ -1,8 +1,10 @@
 ---
 
 - name: Install Python build dependencies
-  apt:
+  ansible.builtin.apt:
     name: '{{ python_build_install_dependencies_of }}'
     state: build-dep
   become: '{{ do_become }}'
   tags: [python, packages] # FIXME Remove when this is fixed https://github.com/ansible/ansible/issues/30882
+
+...

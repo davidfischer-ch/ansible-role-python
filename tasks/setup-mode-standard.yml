@@ -2,7 +2,7 @@
 
 - block:
     - name: Install Python packages
-      package:
+      ansible.builtin.package:
         name: '{{ python_packages }}'
         state: present
 
@@ -17,7 +17,7 @@
 
     - block:
         - name: Download PyPy release package
-          get_url:
+          ansible.builtin.get_url:
             url: '{{ python_pypy_release_url }}'
             dest: '{{ local_source_directory }}/{{ python_pypy_release_name }}.{{ python_pypy_release_extension }}'
             checksum: '{{ python_pypy_latest_checksums[item|string] }}'
@@ -25,14 +25,14 @@
           loop: '{{ python_pypy_versions }}'
 
         - name: Extract PyPy release
-          unarchive:
+          ansible.builtin.unarchive:
             src: '{{ local_source_directory }}/{{ python_pypy_release_name }}.{{ python_pypy_release_extension }}'
             dest: '{{ local_source_directory }}'
             copy: no
           loop: '{{ python_pypy_versions }}'
 
         - name: Symlink PyPy runtime
-          file:
+          ansible.builtin.file:
             src: "{{ local_source_directory }}/{{ python_pypy_release_name }}/bin/pypy{{ item|string|first|regex_replace('2', '') }}"
             dest: '/usr/local/bin/pypy{{ item }}'
             state: link
@@ -41,14 +41,14 @@
 
     - block:
         - name: Download pip bootstrap script
-          get_url:
+          ansible.builtin.get_url:
             url: https://bootstrap.pypa.io{{ (item|string == '3.2')|ternary('/3.2', '') }}/get-pip.py
             dest: '{{ local_source_directory }}/get-pip-{{ item }}.py'
           loop: '{{ python_versions }}'
           environment: '{{ python_download_environment }}'
 
         - name: Install pip
-          get_pip:
+          ansible.builtin.get_pip:
             executable: '{{ local_source_directory }}/get-pip-{{ item }}.py'
             options: '{{ python_get_pip_options }}'
             python: '{{ python_paths[item]|default(python_default_path) }}'
@@ -58,16 +58,16 @@
           loop: '{{ python_versions }}'
 
         - name: Set pip default version
-          copy:
+          ansible.builtin.copy:
             src: '{{ python_pip_path }}{{ python_default_version }}'
             dest: '{{ python_pip_path }}'
             mode: '755'
-            remote_src: yes
+            remote_src: true
       tags: pip
 
     - block:
         - name: Install setuptools
-          pip:
+          ansible.builtin.pip:
             name: setuptools
             executable: '{{ python_pip_path }}{{ item }}'
             state: "{{ (python_setuptools_version == 'latest')|ternary('latest', omit) }}"
@@ -78,7 +78,7 @@
           when: python_setuptools_version|length > 0
 
         - name: Install virtualenv
-          pip:
+          ansible.builtin.pip:
             name: virtualenv
             executable: '{{ python_pip_path }}{{ item }}'
             state: "{{ (python_virtualenv_version == 'latest')|ternary('latest', omit) }}"
@@ -90,3 +90,5 @@
       tags: pytools
   become: '{{ do_become }}'
   tags: [python, packages]
+
+...

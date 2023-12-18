@@ -2,32 +2,32 @@
 
 - block:
     - name: Install Python build packages
-      package:
+      ansible.builtin.package:
         name: '{{ python_build_packages }}'
         state: present
 
     - include_tasks: setup-build-dep-{{ ansible_pkg_mgr }}.yml
       when: python_build_install_dependencies_of|length > 0
 
-    - set_fact:
+    - ansible.builtin.set_fact:
         _python_latest_version: '{{ python_latest_versions[_python_version|string] }}'
         _python_latest_checksum: '{{ python_latest_checksums[_python_version|string] }}'
 
     - name: Download Python {{ _python_latest_version }} source package
-      get_url:
+      ansible.builtin.get_url:
         url: https://www.python.org/ftp/python/{{ _python_latest_version }}/Python-{{ _python_latest_version }}.tgz
         dest: '{{ local_source_directory }}/Python-{{ _python_latest_version }}.tgz'
         checksum: '{{ _python_latest_checksum }}'
       environment: '{{ python_download_environment }}'
 
     - name: Extract Python {{ _python_latest_version }} source code
-      unarchive:
+      ansible.builtin.unarchive:
         src: '{{ local_source_directory }}/Python-{{ _python_latest_version }}.tgz'
         dest: '{{ local_source_directory }}'
-        copy: no
+        copy: false
 
     - name: Bootstrap Python {{ _python_latest_version }} build process
-      command:
+      ansible.builtin.command:
         ./configure {{ python_build_flags|join(' ') }}
       args:
         chdir: '{{ local_source_directory }}/Python-{{ _python_latest_version }}'
@@ -40,20 +40,22 @@
 
     # See https://github.com/pyenv/pyenv/wiki/Common-build-problems
     - name: Build Python {{ _python_latest_version }} from source
-      make:
+      ansible.builtin.make:
         chdir: '{{ local_source_directory }}/Python-{{ _python_latest_version }}'
         params: '{{ python_build_params }}'
       environment: '{{ python_build_environment }}'
       register: _python_build
 
-    - debug:
+    - ansible.builtin.debug:
         var: _python_build
         verbosity: 3
 
     - name: Install Python {{ _python_latest_version }} from source
-      make:
+      ansible.builtin.make:
         chdir: '{{ local_source_directory }}/Python-{{ _python_latest_version }}'
         target: install
       environment: '{{ python_build_environment }}'
   become: '{{ do_become }}'
   tags: [python, packages, cpython] # FIXME Remove when this is fixed https://github.com/ansible/ansible/issues/30882
+
+...
