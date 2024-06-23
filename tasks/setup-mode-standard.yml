@@ -48,7 +48,7 @@
           environment: '{{ python_download_environment }}'
 
         - name: Install pip
-          get_pip:
+          ansible.builtin.get_pip:
             executable: '{{ local_source_directory }}/get-pip-{{ item }}.py'
             options: '{{ python_get_pip_options }}'
             python: '{{ python_paths[item]|default(python_default_path) }}'

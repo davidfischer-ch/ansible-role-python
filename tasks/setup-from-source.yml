@@ -34,7 +34,7 @@
       environment: '{{ python_build_environment }}'
       register: _python_configure
 
-    - debug:
+    - ansible.builtin.debug:
         var: _python_configure.stdout_lines
         verbosity: 3
 
