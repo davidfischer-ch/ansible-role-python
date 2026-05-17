@@ -267,6 +267,13 @@ python_pip_environment:
   PIP_TRUSTED_HOST: some-repository.com
 ```
 
+#### python_pip_break_system_packages
+
+Allow pip to install packages into an externally-managed environment (PEP 668).
+Required on Ubuntu 24+ and Debian 12+ when using the system pip rather than a virtualenv.
+
+Default: `false` (dynamically overridden to `true` for Ubuntu 24.x via `python_dynamic_defaults`)
+
 #### python_pip_path
 
 Path to *default* pip binary (will be copied from pip(python_default_version)).

@@ -93,6 +93,7 @@
           ansible.builtin.pip:
             name: setuptools
             executable: '{{ python_pip_path }}{{ item }}'
+            break_system_packages: '{{ python_pip_break_system_packages }}'
             state: "{{ (python_setuptools_version == 'latest')|ternary('latest', omit) }}"
             umask: '{{ python_pip_umask }}'
             version: "{{ (python_setuptools_version == 'latest')|ternary(omit, python_setuptools_version) }}"
@@ -117,6 +118,7 @@
           ansible.builtin.pip:
             name: virtualenv
             executable: '{{ python_pip_path }}{{ item }}'
+            break_system_packages: '{{ python_pip_break_system_packages }}'
             state: "{{ (python_virtualenv_version == 'latest')|ternary('latest', omit) }}"
             umask: '{{ python_pip_umask }}'
             version: "{{ (python_virtualenv_version == 'latest')|ternary(omit, python_virtualenv_version) }}"

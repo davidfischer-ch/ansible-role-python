@@ -119,6 +119,14 @@ python_dynamic_defaults:
     python_versions:
       - '3.10'
 
+  ubuntu-24.*:
+    python_build_install_dependencies_of: python3
+    python_packages:
+      - python3-dev
+    python_pip_break_system_packages: true
+    python_versions:
+      - '3.12'
+
   linux:
     python_build_install_dependencies_of: python
     python_build_packages:
@@ -216,6 +224,7 @@ python_pypy_versions: []
 # PIP
 
 python_get_pip_options: []
+python_pip_break_system_packages: false
 python_pip_environment: {}
 _python_pip_path:
   rhsm: /usr/bin/pip
